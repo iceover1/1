@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>安装半米cms</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+		<meta name="renderer" content="webkit">
+
+		<style>
+			body {
+				background-color: #F5F5F5;
+			}
+
+			.flex {
+				display: flex !important;
+				display: -webkit-flex !important;
+				display: -webkit-box;
+
+			}
+
+			.j-c {
+				justify-content: center;
+
+			}
+
+			.a-c {
+				align-items: center !important;
+			}
+
+			.p2 {
+				padding: 10px;
+			}
+
+			.l50 {
+				line-height: 40px;
+			}
+
+			.layui-textarea {
+				min-height: 500px;
+
+			}
+
+			.banmi_button_1 {
+				background-color: #09BB07;
+				width: 260px;
+				height: 40px;
+				border-radius: 5px;
+				color: #fff;
+			}
+
+			.banmi_input {
+				width: 400px;
+				height: 30px;
+				font-size: 18px;
+				padding: 5px 10px 5px 10px;
+			}
+
+			.banmi_iu {
+				margin-left: 20px;
+			}
+
+			label {
+				font-size: 18px;
+				font-weight: 800;
+				width: 150px;
+			}
+
+			.ml2 {
+				margin-left: 20px;
+			}
+
+	 
+
+	 
+
+			.banmi-field {
+				font-size: 18px;
+				padding: 0px 22px; 
+				border-width: 1px 0 0
+			}
+		</style>
+	</head>
+
+	<body>
+
+
+		<div class="flex j-c  " style="width: 100%;padding-top: 50px;">
+
+			<div class="p2" style="width: 60%;background-color: #fff;">
+				<div class="flex j-c  ">
+					<h2>连接数据库</h2>
+				</div>
+
+				<div class=" ">
+			 
+
+
+					<div class="main p2">
+						<fieldset class="banmi-field  " >
+							<legend>数据库信息</legend>
+						</fieldset>
+						<div class="flex a-c p2">
+							<label class="">数据库名称</label>
+							<div class="banmi_iu">
+								<input type="text" name="dbname" value="localhost" class="banmi_input">
+							</div>
+							<div class="ml2">
+								数据库服务器地址，一般为localhost
+							</div>
+						</div>
+						<div class="flex a-c p2">
+							<label class="">数据库用户名</label>
+							<div class="banmi_iu">
+								<input type="text" name="dbname" class="banmi_input">
+							</div>
+						</div>
+						<div class="flex a-c p2">
+							<label class="">数据库名称</label>
+							<div class="banmi_iu">
+								<input type="text" name="dbname" class="banmi_input">
+							</div>
+						</div>
+						<div class="flex a-c p2" style="padding-bottom: 40px;">
+							<label class="">数据库密码</label>
+							<div class="banmi_iu">
+								<input type="text" name="dbname" class="banmi_input">
+							</div>
+						</div>
+						<fieldset class="banmi-field"  >
+							<legend>创始人信息</legend>
+						</fieldset>
+						<div class="flex a-c p2">
+							<label class="">管理员账号</label>
+							<div class="banmi_iu">
+								<input type="text" name="dbname"   class="banmi_input">
+							</div>
+							 
+						</div>
+						<div class="flex a-c p2">
+							<label class="">管理员密码</label>
+							<div class="banmi_iu">
+								<input type="text" name="dbname"   class="banmi_input">
+							</div>
+							 
+						</div>
+						<div class="flex a-c p2">
+							<label class="">确认密码</label>
+							<div class="banmi_iu">
+								<input type="text" name="dbname"  class="banmi_input">
+							</div> 
+						</div>
+						<div class="flex a-c p2">
+							<label class="">管理员手机号</label>
+							<div class="banmi_iu">
+								<input type="text" name="dbname"  class="banmi_input">
+							</div> 
+						</div>
+						
+
+
+
+					</div>
+
+
+					<div class="flex j-c " style="padding-top: 10px;">
+
+						<div class="banmi_button_1" style="background-color: #1E90FF;">确认安装</div>
+
+
+					</div>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<!-- jQuery -->
+		<script src="https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js"></script>
+
+		<script>
+			$(function() {
+				$('form :input:first').select();
+
+				$('form').on('submit', function(e) {
+					e.preventDefault();
+					var form = this;
+					var $error = $("#error");
+					var $success = $("#success");
+					var $button = $(this).find('button')
+						.text("安装中...")
+						.prop('disabled', true);
+					$.ajax({
+						url: "",
+						type: "POST",
+						dataType: "json",
+						data: $(this).serialize(),
+						success: function(ret) {
+							if (ret.code == 1) {
+								var data = ret.data;
+								$error.hide();
+								$(".form-group", form).remove();
+								$button.remove();
+								$("#success").text(ret.msg).show();
+
+								$buttons = $(".form-buttons", form);
+								$("<a class='btn' href='./'>访问首页</a>").appendTo($buttons);
+
+								if (typeof data.adminName !== 'undefined') {
+									var url = location.href.replace(/install\.php/, data.adminName);
+									$("#warmtips").html(
+										"温馨提示：请将以下后台登录入口添加到你的收藏夹，为了你的安全，不要泄漏或发送给他人！如有泄漏请及时修改！" +
+										'<a href="' + url + '">' + url + '</a>').show();
+									$('<a class="btn" href="' + url +
+										'" id="btn-admin" style="background:#4e73df">' + "进入后台" +
+										'</a>').appendTo($buttons);
+								}
+								localStorage.setItem("fastep", "installed");
+							} else {
+								$error.show().text(ret.msg);
+								$button.prop('disabled', false).text("点击安装");
+								$("html,body").animate({
+									scrollTop: 0
+								}, 500);
+							}
+						},
+						error: function(xhr) {
+							$error.show().text(xhr.responseText);
+							$button.prop('disabled', false).text("点击安装");
+							$("html,body").animate({
+								scrollTop: 0
+							}, 500);
+						}
+					});
+					return false;
+				});
+			});
+		</script>
+		</div>
+		</div>
+	</body>
+</html>

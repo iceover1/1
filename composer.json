@@ -1,0 +1,69 @@
+{
+    "name": "topthink/think",
+    "description": "the new thinkphp framework",
+    "type": "project",
+    "keywords": [
+        "framework",
+        "thinkphp",
+        "ORM"
+    ],
+    "homepage": "https://www.thinkphp.cn/",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "liu21st",
+            "email": "liu21st@gmail.com"
+        },
+        {
+            "name": "yunwuxin",
+            "email": "448901948@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.5",
+        "topthink/framework": "^6.1.0",
+        "topthink/think-orm": "^2.0",
+        "topthink/think-filesystem": "^1.0",
+        "topthink/think-multi-app": "^1.0",
+        "qiniu/php-sdk": "^7.7",
+        "topthink/think-view": "^1.0",
+        "firebase/php-jwt": "^6.3",
+        "overtrue/pinyin": "^5.0",
+        "tp5er/tp5-databackup": "dev-master",
+        "topthink/think-captcha": "^3.0",
+        "topthink/think-worker": "^3.0",
+        "topthink/think-migration": "^3.0",
+        "yunwuxin/think-cron": "^3.0",
+        "jaeger/querylist": "^4.2",
+        "yansongda/pay": "~3.2.0",
+        "php-di/php-di": "^7.0",
+        "phpoffice/phpspreadsheet": "^1.28",
+        "topthink/think-throttle": "^1.3",
+        "qcloud_sts/qcloud-sts-sdk": "3.0.*",
+        "aliyuncs/oss-sdk-php": "^2.6",
+        "tencentcloud/tencentcloud-sdk-php": "^3.0",
+        "alibabacloud/sdk": "^1.8",
+        "griffinledingham/php-apple-signin": "^1.1"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^4.2",
+        "topthink/think-trace": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\": "app"
+        },
+        "psr-0": {
+            "": "extend/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php think service:discover",
+            "@php think vendor:publish"
+        ]
+    }
+}
